@@ -1,0 +1,29 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+ENV POETRY_REQUESTS_TIMEOUT=600 \
+    POETRY_NO_INTERACTION=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir poetry
+
+COPY authentification/pyproject.toml ./
+
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-root --no-interaction
+
+COPY authentification/main.py ./main.py
+COPY authentification/src ./src
+
+ENV PYTHONPATH=/app/src
+
+RUN poetry install --only-root --no-interaction
+
+CMD ["sh", "-c", "poetry run flake8 . && poetry run pytest -v --cov=src --cov-report=term-missing --cov-report=xml --cov-report=html --cov-fail-under=80"]
