@@ -5,6 +5,15 @@
 - arrêter l'application
 > docker compose down
 
+- stopper l'application
+> docker compose start
+
+- starter l'application
+> docker compose stop
+
+- lancer le test de dockerfile.test
+> docker compose run --rm test
+
 ---------------------------------
 Dockerfile pointe vers authentification.main:app et copie le bon pyproject.toml.
 
@@ -13,7 +22,7 @@ Dockerfile pointe vers authentification.main:app et copie le bon pyproject.toml.
 1- USER
     email: user@urbanhub.tn
     password: Password1!
-    
+
 2- CELLULE_DECISIONNEL
     email: cellule@urbanhub.tn
     password: Password2!
