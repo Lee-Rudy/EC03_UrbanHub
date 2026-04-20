@@ -1,0 +1,28 @@
+[project]
+name = "ms-user"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "AmbiNtsoah",email = "ambinints04@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard] (>=0.136.0,<0.137.0)",
+    "pytest (>=9.0.3,<10.0.0)",
+    "asyncpg (>=0.31.0,<0.32.0)",
+    "dotenv (>=0.9.9,<0.10.0)",
+    "jwt (>=1.4.0,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "ms_user", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+test = [
+    "pytest (>=9.0.3,<10.0.0)"
+]

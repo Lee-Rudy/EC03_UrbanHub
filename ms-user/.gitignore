@@ -1,0 +1,18 @@
+# IDE
+.idea/
+.vscode/
+
+# Snyk
+.github/instructions/snyk_rules.instructions.md
+
+# Sonarqube
+.sonarlint/
+
+# environment
+.env
+
+# Python folder
+__pycache__/
+
+# Github
+.github/
