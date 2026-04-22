@@ -1,0 +1,26 @@
+services:
+  user_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms_user
+    ports:
+      - "8004:8004"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/user_db
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16
+    container_name: ms_user_db
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
