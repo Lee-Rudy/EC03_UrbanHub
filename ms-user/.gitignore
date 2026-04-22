@@ -1,18 +1,19 @@
-# IDE
+# Actions
+.github/
+
+#Snyk
+.github/instructions/snyk_rules.instructions.md
+
+#sonarqube
+.sonarlint/
+
+#environment
+.env
+.env.test
+
+#IDE
 .idea/
 .vscode/
 
-# Snyk
-.github/instructions/snyk_rules.instructions.md
-
-# Sonarqube
-.sonarlint/
-
-# environment
-.env
-
-# Python folder
+#python
 __pycache__/
-
-# Github
-.github/
