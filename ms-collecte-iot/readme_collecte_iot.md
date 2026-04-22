@@ -5,7 +5,7 @@ Microservice de **collecte, normalisation et agrégation** des données capteurs
 ![CI/CD](https://github.com/Lee-Rudy/EC03_UrbanHub/actions/workflows/ms-collecte-iot.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110-green)
-![Coverage](https://img.shields.io/badge/Coverage-72%25-yellowgreen)
+![Coverage](https://img.shields.io/badge/Coverage-94%25-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 
 ---
@@ -400,21 +400,27 @@ poetry run flake8 app/ tests/
 ### Résultats actuels
 
 ```
-46 tests — 46 passed — 0 failed
-Coverage : 72%
+89 tests — 89 passed — 0 failed
+Coverage : 94%
 ```
 
 ### Organisation des tests
 
 ```
 tests/
-├── conftest.py          # Variables d'env de test (évite connexion Kafka/MongoDB réels)
+├── conftest.py                         # Variables d'env de test (pas de connexion Kafka/MongoDB réels)
 ├── unit/
-│   ├── test_normalization_domain.py   # Conversions timestamp, unités (12 tests)
-│   ├── test_validation_domain.py      # Règles métier, statuts capteur (14 tests)
-│   └── test_aggregation_domain.py     # Fenêtres 30s, sommes, moyennes (9 tests)
+│   ├── test_normalization_domain.py    # Conversions timestamp, unités (12 tests)
+│   ├── test_validation_domain.py       # Règles métier, statuts capteur (14 tests)
+│   ├── test_aggregation_domain.py      # Fenêtres 30s, sommes, moyennes (9 tests)
+│   ├── test_mapper.py                  # DTO → entité → événement Kafka (8 tests)
+│   ├── test_kafka_producer.py          # Producteur Kafka mocké (7 tests)
+│   ├── test_mongo_client.py            # Client MongoDB mocké (6 tests)
+│   ├── test_sensor_repository.py       # Repository MongoDB mocké (11 tests)
+│   ├── test_api_key_service.py         # Auth : capteur désactivé, clé expirée (5 tests)
+│   └── test_event_output_dto.py        # DTO de sortie Kafka (6 tests)
 └── integration/
-    └── test_sensor_controller.py      # Endpoints HTTP bout-en-bout (11 tests)
+    └── test_sensor_controller.py       # Endpoints HTTP bout-en-bout (11 tests)
 ```
 
 ---
