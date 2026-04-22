@@ -1,17 +1,4 @@
-from fastapi.testclient import TestClient
+from __future__ import annotations
 
-from app.main import app
-
-client = TestClient(app)
-
-
-def test_health_endpoint_status_code():
-    response = client.get("/health")
-    assert response.status_code == 200
-
-
-def test_health_endpoint_response_body():
-    response = client.get("/health")
-    data = response.json()
-    assert data["status"] == "ok"
-    assert data["service"] == "ms-collecte-iot"
+# Ce fichier est conservé pour compatibilité mais les tests ont migré vers :
+#   tests/integration/test_sensor_controller.py

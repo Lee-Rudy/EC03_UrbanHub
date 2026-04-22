@@ -15,5 +15,13 @@ RUN poetry install --no-root
 
 COPY app/ ./app/
 COPY tests/ ./tests/
+COPY config/ ./config/
 
-CMD ["pytest", "tests/", "-v", "--cov=app", "--cov-report=term-missing", "--cov-report=xml:coverage.xml"]
+# Crée le dossier reports/ où pytest dépose les rapports JUnit et coverage
+RUN mkdir -p reports
+
+CMD ["pytest", "tests/", "-v", \
+     "--junitxml=reports/junit.xml", \
+     "--cov=app", \
+     "--cov-report=term-missing", \
+     "--cov-report=xml:reports/coverage.xml"]

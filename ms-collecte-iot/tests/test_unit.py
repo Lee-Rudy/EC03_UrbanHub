@@ -1,11 +1,5 @@
-from app.main import health
+from __future__ import annotations
 
-
-def test_health_returns_ok():
-    result = health()
-    assert result["status"] == "ok"
-
-
-def test_health_returns_correct_service():
-    result = health()
-    assert result["service"] == "ms-collecte-iot"
+# Ce fichier est conservé pour compatibilité mais les tests ont migré vers :
+#   tests/unit/       (tests unitaires)
+#   tests/integration/ (tests d'intégration)

@@ -1,0 +1,29 @@
+[
+  {
+    "api_key": "key_radar_001_abc123",
+    "mac_address": "00:1A:2B:3C:4D:5E",
+    "sensor_id": "radar_junction_001",
+    "sensor_type": "radar",
+    "zone_id": "int_001",
+    "enabled": true,
+    "expires_at": "2027-12-31T23:59:59Z"
+  },
+  {
+    "api_key": "key_smartcam_001_def456",
+    "mac_address": "00:1A:2B:3C:4D:5F",
+    "sensor_id": "smartcam_junction_001",
+    "sensor_type": "smartcamera",
+    "zone_id": "int_001",
+    "enabled": true,
+    "expires_at": "2027-12-31T23:59:59Z"
+  },
+  {
+    "api_key": "key_loop_001_ghi789",
+    "mac_address": "00:1A:2B:3C:4D:60",
+    "sensor_id": "loop_junction_001_lane_1",
+    "sensor_type": "inductiveloop",
+    "zone_id": "int_001",
+    "enabled": true,
+    "expires_at": "2027-12-31T23:59:59Z"
+  }
+]

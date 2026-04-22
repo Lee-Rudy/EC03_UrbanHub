@@ -1,0 +1,17 @@
+# Rapports de tests générés automatiquement (ne pas committer)
+reports/
+
+# Environnement virtuel Poetry
+.venv/
+
+# Fichier .env local (contient des secrets — jamais committer !)
+.env
+
+# Fichier de contexte Claude Code (usage local uniquement)
+CLAUDE.md
+
+# Cache Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
