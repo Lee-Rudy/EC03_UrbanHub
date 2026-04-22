@@ -14,6 +14,16 @@
 - lancer le test de dockerfile.test
 > docker compose run --rm test
 
+# commande Dockerfile.test (il faut être au niveau du dossier ms-auth):
+- depuis le dossier ms-auth :
+> docker build -f Dockerfile.test -t ms-auth-test .
+
+
+- puis exécuter le conteneur :
+> docker run --rm ms-auth-test
+
+- combinaison des deux commandes :
+> docker build -f Dockerfile.test -t ms-auth-test . && docker run --rm ms-auth-test
 ---------------------------------
 Dockerfile pointe vers authentification.main:app et copie le bon pyproject.toml.
 
