@@ -26,7 +26,7 @@ def test_audit_log_creation():
         resource="user"
     )
 
-    assert isinstance(log, AuditLog)
+    assert isinstance(log, Log)
     assert log.user_id == "user123"
     assert log.action == "CREATE_USER"
     assert log.resource == "user"

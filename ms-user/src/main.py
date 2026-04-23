@@ -6,7 +6,9 @@ from src.ms_user.domain.log import Log
 
 app = FastAPI(title="User Management Portal")
 
-Base.metadata.create_all(bind=engine)
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def root():
