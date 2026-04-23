@@ -2,17 +2,18 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src
+
 RUN pip install --no-cache-dir poetry
 
-COPY pyproject.toml ./
+COPY pyproject.toml poetry.lock* README.md ./
 
 RUN poetry config virtualenvs.create false && \
-    poetry install --no-root --with dev --no-interaction
+    poetry install --with dev --no-interaction --no-ansi --no-root
 
-COPY src/main.py ./main.py
-COPY src ./src/
-COPY tests ./tests/
+COPY src/ ./src/
+COPY tests/ ./tests/
 
-ENV PYTHONPATH=/app/src
-
-CMD ["sh", "-c", "poetry run pytest -v --cov=app --cov-report=term-missing --cov-fail-under=80"]
+CMD ["pytest", "-v", "--cov=src", "--cov-report=term-missing", "--cov-fail-under=80"]

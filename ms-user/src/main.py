@@ -1,7 +1,14 @@
 from fastapi import FastAPI
+from src.core.database import Base, engine
 
-app = FastAPI(title="User Management Microservice")
+from src.ms_user.domain.user import User
+from src.ms_user.domain.log import Log
 
-@app.get("/health")
-def health():
-    return {"status": "ok", "service": "ms-user"}
+app = FastAPI(title="ms-user")
+
+Base.metadata.create_all(bind=engine)
+
+
+@app.get("/")
+def root():
+    return {"status": "User Management Okay"}
