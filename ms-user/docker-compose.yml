@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/app
     environment:
-      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/user_db
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@database:5432/user_db
     depends_on:
       - database
 
@@ -21,6 +21,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5434:5434"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
