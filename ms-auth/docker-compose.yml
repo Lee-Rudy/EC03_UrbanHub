@@ -1,0 +1,23 @@
+services:
+  auth-service:
+    build: .
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/db_auth
+      JWT_SECRET_KEY: "change-me-in-production"
+      JWT_ALGORITHM: "HS256"
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db_auth
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./authentification/database/db_auth.sql:/docker-entrypoint-initdb.d/00_db_auth.sql:ro

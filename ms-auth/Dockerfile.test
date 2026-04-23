@@ -1,0 +1,28 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+ENV POETRY_REQUESTS_TIMEOUT=600 \
+    POETRY_NO_INTERACTION=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir poetry
+
+COPY authentification/pyproject.toml ./
+
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-root --with dev --no-interaction
+
+COPY authentification/main.py ./main.py
+COPY authentification/src ./src
+COPY authentification/tests ./tests
+
+ENV PYTHONPATH=/app/src
+
+CMD ["sh", "-c", "poetry run pytest -v --cov=authentification --cov-report=term-missing --cov-fail-under=80"]
