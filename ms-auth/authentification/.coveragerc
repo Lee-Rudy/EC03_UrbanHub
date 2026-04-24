@@ -1,0 +1,14 @@
+[run]
+source = src
+relative_files = True
+
+[report]
+omit =
+    tests/*
+    */tests/*
+    */__init__.py
+
+[paths]
+source =
+    src
+    */ms-auth/authentification/src
