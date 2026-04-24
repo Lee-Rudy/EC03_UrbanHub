@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+
+  ms-auth:
+    image: ghcr.io/lee-rudy/ec03_urbanhub/ms-auth:latest
+    container_name: ms-auth
+    ports:
+      - "8000:8000"
+    env_file:
+      - ms-auth/.env
+    networks:
+      - urbanhub-net
+
+  ms-user:
+    image: ghcr.io/lee-rudy/ec03_urbanhub/ms-user:latest
+    container_name: ms-user
+    ports:
+      - "8002:8000"
+    env_file:
+      - ms-user/.env
+    networks:
+      - urbanhub-net
+
+  ms-collecte-iot:
+    image: ghcr.io/lee-rudy/ec03_urbanhub/ms-collecte-iot:latest
+    container_name: ms-collecte-iot
+    ports:
+      - "8002:8000"
+    env_file:
+      - ms-collecte-iot/.env
+    depends_on:
+      - mqtt-broker
+    networks:
+      - urbanhub-net
+
+  ms-analyse-trafic:
+    image: ghcr.io/lee-rudy/ec03_urbanhub/ms-analyse-trafic:latest
+    container_name: ms-analyse-trafic
+    ports:
+      - "8003:8000"
+    env_file:
+      - ms-analyse-trafic/.env
+    networks:
+      - urbanhub-net
+
+  ms-alerte:
+    image: ghcr.io/lee-rudy/ec03_urbanhub/ms-alerte:latest
+    container_name: ms-alerte
+    ports:
+      - "8004:8000"
+    env_file:
+      - ms-alerte/.env
+    networks:
+      - urbanhub-net
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+    networks:
+      - urbanhub-net
+
+networks:
+  urbanhub-net:
+    driver: bridge
